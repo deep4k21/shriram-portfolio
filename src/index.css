@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+}
+
+@keyframes marquee-up {
+  0%      { transform: translateY(0); }
+  15.15%  { transform: translateY(0); }
+  16.67%  { transform: translateY(-8.3333%); }
+  31.82%  { transform: translateY(-8.3333%); }
+  33.33%  { transform: translateY(-16.6667%); }
+  48.48%  { transform: translateY(-16.6667%); }
+  50%     { transform: translateY(-25%); }
+  65.15%  { transform: translateY(-25%); }
+  66.67%  { transform: translateY(-33.3333%); }
+  81.82%  { transform: translateY(-33.3333%); }
+  83.33%  { transform: translateY(-41.6667%); }
+  98.48%  { transform: translateY(-41.6667%); }
+  100%    { transform: translateY(-50%); }
+}
+
+.marquee-up {
+  animation: marquee-up 33s linear infinite;
+}
