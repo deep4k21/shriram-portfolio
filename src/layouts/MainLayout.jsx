@@ -1,30 +1,35 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import Sidebar from '../components/Sidebar'
+import ContactModal from '../components/ContactModal'
 import AboutMe from '../pages/AboutMe'
 import CareerJourney from '../pages/CareerJourney'
-import ComingSoon from '../pages/ComingSoon'
-
-const pages = {
-  about:                    () => <AboutMe />,
-  portfolio:                () => <ComingSoon label="Portfolio" />,
-  'portfolio-uiux':         () => <ComingSoon label="UI/UX" />,
-  'portfolio-brand':        () => <ComingSoon label="Brand Identity" />,
-  'portfolio-marketing':    () => <ComingSoon label="Marketing Campaigns" />,
-  'portfolio-illustrations':() => <ComingSoon label="Illustrations" />,
-  career:                   () => <CareerJourney />,
-  connect:                  () => <ComingSoon label="Let's Connect" />,
-}
+import Portfolio from '../pages/Portfolio'
+import PortfolioDetail from '../pages/PortfolioDetail'
+import { portfolioSections } from '../data/portfolio'
 
 export default function MainLayout({ onGoHome }) {
   const [activeId, setActiveId] = useState('about')
+  const [contactOpen, setContactOpen] = useState(false)
 
   function handleNavigate(id) {
     if (id === 'home') {
       onGoHome()
+    } else if (id === 'connect') {
+      setContactOpen(true)
     } else {
       setActiveId(id)
     }
+  }
+
+  const pages = {
+    about:     () => <AboutMe />,
+    portfolio: () => <Portfolio onNavigate={handleNavigate} />,
+    career:    () => <CareerJourney />,
+  }
+
+  for (const section of portfolioSections) {
+    pages[section.id] = () => <PortfolioDetail section={section} />
   }
 
   const Page = pages[activeId] ?? pages.about
@@ -35,6 +40,7 @@ export default function MainLayout({ onGoHome }) {
       <main className="flex-1 overflow-hidden">
         <Page />
       </main>
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </div>
   )
 }

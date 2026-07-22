@@ -32,7 +32,7 @@ const portfolioSections = [
   { id: 'portfolio-uiux',          label: 'UI/UX' },
   { id: 'portfolio-brand',         label: 'Brand Identity' },
   { id: 'portfolio-marketing',     label: 'Marketing Campaigns' },
-  { id: 'portfolio-illustrations', label: 'Illustrations' },
+  { id: 'portfolio-illustrations', label: 'What If?' },
 ]
 
 const navItems = [
@@ -50,15 +50,16 @@ Sidebar.propTypes = {
 
 export default function Sidebar({ activeId, onNavigate }) {
   const [collapsed, setCollapsed] = useState(false)
-  const [portfolioOpen, setPortfolioOpen] = useState(
-    activeId === 'portfolio' || activeId?.startsWith('portfolio-')
-  )
+  const [manualPortfolioOpen, setManualPortfolioOpen] = useState(null)
 
   const isPortfolioActive = activeId === 'portfolio' || activeId?.startsWith('portfolio-')
+  const portfolioOpen = manualPortfolioOpen ?? isPortfolioActive
 
   function handleNavClick(id) {
     if (id === 'portfolio') {
-      setPortfolioOpen((prev) => !prev)
+      // Re-clicking while already on the Portfolio overview toggles the submenu closed/open.
+      // Clicking it from any other page (including a portfolio sub-page) just opens it.
+      setManualPortfolioOpen(activeId === 'portfolio' ? !portfolioOpen : true)
       onNavigate('portfolio')
     } else {
       onNavigate(id)
@@ -83,8 +84,8 @@ export default function Sidebar({ activeId, onNavigate }) {
         />
       </div>
 
-      {/* Nav items — 75% of sidebar height */}
-      <nav className="flex h-[75%] flex-col gap-1 overflow-y-auto px-4 py-4">
+      {/* Nav items */}
+      <nav className="flex min-h-0 flex-1 flex-col gap-1 px-4 py-4">
         {navItems.map(({ id, label, icon, hasSubmenu }) => {
           const isActive = id === 'portfolio' ? isPortfolioActive : activeId === id
 
@@ -112,9 +113,9 @@ export default function Sidebar({ activeId, onNavigate }) {
                     <button
                       key={subId}
                       onClick={() => onNavigate(subId)}
-                      className={`w-full rounded-md px-3 py-2 text-left text-sm transition-colors duration-150 ${
+                      className={`w-full rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-colors duration-150 ${
                         activeId === subId
-                          ? 'bg-surface-mid/40 text-neutral-light'
+                          ? 'bg-surface-darker text-brand-orange'
                           : 'text-neutral-light hover:bg-surface-mid/20'
                       }`}
                     >
