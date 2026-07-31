@@ -40,7 +40,7 @@ export default function Sidebar({ activeId, onNavigate }) {
         <img
           src="/images/menuicons/avatar.png"
           alt="Shriram Sivakumar"
-          className="aspect-square w-[60%] rounded-full object-cover"
+          className="aspect-square w-[72%] rounded-full object-cover"
         />
       </div>
 
