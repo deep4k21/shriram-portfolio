@@ -1,29 +1,24 @@
 import { useState } from 'react'
-import Home from './pages/Home'
 import MainLayout from './layouts/MainLayout'
+import Sidebar from './components/Sidebar'
+import AboutMe from './pages/AboutMe'
+import ScaleDebugBadge from './components/ScaleDebugBadge'
 
-export default function App() {
-  const [view, setView] = useState('home')
+function App() {
+  const [activeId, setActiveId] = useState('about')
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden">
-      {/* Home — slides up and out */}
-      <div
-        className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-          view === 'main' ? '-translate-y-full' : 'translate-y-0'
-        }`}
-      >
-        <Home onContinue={() => setView('main')} />
-      </div>
-
-      {/* Main layout — slides up from below */}
-      <div
-        className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-          view === 'main' ? 'translate-y-0' : 'translate-y-full'
-        }`}
-      >
-        <MainLayout onGoHome={() => setView('home')} />
-      </div>
-    </div>
+    <>
+      <MainLayout sidebar={<Sidebar activeId={activeId} onNavigate={setActiveId} />}>
+        {activeId === 'about' ? (
+          <AboutMe />
+        ) : (
+          <div className="text-body-white">Coming soon</div>
+        )}
+      </MainLayout>
+      {import.meta.env.DEV && <ScaleDebugBadge />}
+    </>
   )
 }
+
+export default App

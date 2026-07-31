@@ -20,3 +20,7 @@ Thumbs.db
 # logs
 *.log
 npm-debug.log*
+
+# claude files
+*.claude
+.claude/

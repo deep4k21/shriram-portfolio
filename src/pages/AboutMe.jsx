@@ -1,17 +1,16 @@
-import PropTypes from 'prop-types'
-
-const B = ({ children }) => (
-  <span className="text-neutral-light">{children}</span>
-)
-B.propTypes = { children: PropTypes.node.isRequired }
+import HeroTitle from '../components/text/HeroTitle'
+import HeroSubtitle from '../components/text/HeroSubtitle'
+import BodySubtitle, { Emphasis } from '../components/text/BodySubtitle'
+import AtAGlanceCard from '../components/AtAGlanceCard'
+import GlassPanelCard from '../components/GlassPanelCard'
 
 const glanceItems = [
-  <>rebrands in{' '}<B>SaaS and marketing on multiple projects.</B></>,
-  <>clean, user-first{' '}<B>UI/UX for Dashboards &amp; Websites.</B></>,
-  <>expert use of{' '}<B>Figma &amp; Adobe Creative Suite.</B></>,
-  <>working across{' '}<B>APAC/US/EU/ANZ markets.</B></>,
-  <>conceptualizing and designing{' '}<B>C-level presentations.</B></>,
-  <>visuals for{' '}<B>company product launches and events.</B></>,
+  { grey: 'rebrands in', white: 'SaaS and marketing on multiple project' },
+  { grey: 'clean, user-first', white: 'UI/UX for Dashboards & Websites.' },
+  { grey: 'expert use of', white: 'Figma & Adobe Creative Suite.' },
+  { grey: 'working across', white: 'APAC/US/EU/ANZ markets.' },
+  { grey: 'conceptualizing and designing', white: 'C-level presentations.' },
+  { grey: 'visuals for', white: 'company product launches and events.' },
 ]
 
 const myToolkitImages = [
@@ -38,81 +37,36 @@ const aiWorkflowImages = [
 ]
 
 export default function AboutMe() {
-
   return (
-    <div className="flex h-full w-full flex-col gap-5 overflow-hidden rounded-[20px] bg-surface-dark/90 p-8 backdrop-blur-[20px]">
+    <div className="flex flex-col gap-6">
+      <HeroTitle lead="Layovers to layouts, " emphasis="I’m Shriram." />
 
-      {/* Hero */}
-      <div className="shrink-0">
-        <h1 className="text-4xl font-light leading-tight text-neutral-muted">
-          Hello, I&apos;m <span className="font-bold text-neutral-light">Shriram</span>
-        </h1>
-        <p className="mt-2 text-sm">
-          <span className="text-brand-orange">Designer by profession,</span>{' '}
-          <span className="text-brand-cyan">Traveler by instinct.</span>
-        </p>
-        <p className="mt-3 text-sm leading-relaxed text-neutral-light">
-          Over <strong>9 years</strong>, I&apos;ve designed{' '}
-          <strong>SaaS</strong> products, intuitive{' '}
-          <strong>UI/UX</strong> experiences, and scalable visual
-          systems shaped by global perspective and bold thinking.
-        </p>
-      </div>
+      <HeroSubtitle orange="Designer by profession, " green="Traveler by instinct." />
 
-      {/* At a Glance — rolling text block */}
-      <div className="shrink-0 rounded-2xl bg-surface-darker p-5">
-        <p className="text-xs font-semibold uppercase tracking-widest text-brand-cyan">
-          At a Glance
-        </p>
-        <p className="mt-2 text-xl font-light leading-snug text-neutral-light/50">
-          I&apos;ve contributed through
-        </p>
-        {/* Infinite upward marquee — doubled list for seamless loop */}
-        <div className="h-[2rem] overflow-hidden">
-          <div className="marquee-up flex flex-col">
-            {glanceItems.map((item, i) => (
-              <div key={i} className="h-[2rem] shrink-0 leading-[2rem] text-xl font-light text-neutral-light/50">
-                {item}
-              </div>
-            ))}
-            {glanceItems.map((item, i) => (
-              <div key={`dup-${i}`} className="h-[2rem] shrink-0 leading-[2rem] text-xl font-light text-neutral-light/50">
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <BodySubtitle>
+        Over <Emphasis>9 years, </Emphasis>
+        I’ve designed <Emphasis>SaaS</Emphasis> products, intuitive{' '}
+        <Emphasis>UI/UX</Emphasis> experiences, and scalable visual systems
+        shaped by global perspective and bold thinking.
+      </BodySubtitle>
 
-      {/* Tool cards */}
-      <div className="flex min-h-0 flex-1 gap-4">
+      <AtAGlanceCard
+        eyebrow="At a Glance"
+        lead="I’ve contributed through"
+        items={glanceItems}
+      />
 
-        {/* My Toolkit */}
-        <div className="flex flex-1 flex-col overflow-hidden rounded-2xl bg-surface-darker p-5">
-          <h3 className="shrink-0 text-sm font-semibold text-brand-cyan">My Toolkit</h3>
-          <p className="mt-0.5 shrink-0 text-xs text-neutral-muted">
-            The tools I use to design, prototype, and bring ideas to life.
-          </p>
-          <div className="mt-3 grid grid-cols-7 gap-2">
-            {myToolkitImages.map((src, i) => (
-              <img key={i} src={src} alt="" className="h-11 w-11 cursor-pointer rounded-lg object-contain transition-transform duration-200 hover:scale-125" />
-            ))}
-          </div>
-        </div>
-
-        {/* AI Workflow */}
-        <div className="flex flex-1 flex-col overflow-hidden rounded-2xl bg-surface-darker p-5">
-          <h3 className="shrink-0 text-sm font-semibold text-brand-cyan">AI Workflow</h3>
-          <p className="mt-0.5 shrink-0 text-xs text-neutral-muted">
-            AI tools I use to accelerate ideation, workflows, and execution.
-          </p>
-          <div className="mt-3 grid grid-cols-6 gap-2">
-            {aiWorkflowImages.map((src, i) => (
-              <img key={i} src={src} alt="" className="h-11 w-11 cursor-pointer rounded-lg object-contain transition-transform duration-200 hover:scale-125" />
-            ))}
-          </div>
-        </div>
-
+      <div className="flex gap-6">
+        <GlassPanelCard
+          title="My Toolkit"
+          description="The tools I use to design, prototype, and bring ideas to life."
+          icons={myToolkitImages}
+        />
+        <GlassPanelCard
+          title="AI Workflow"
+          description="AI tools I use to accelerate ideation, workflows, and execution."
+          icons={aiWorkflowImages}
+        />
       </div>
     </div>
   )

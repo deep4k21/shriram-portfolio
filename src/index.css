@@ -3,8 +3,41 @@
 @tailwind utilities;
 
 @layer base {
+  /* Figma canvas is 1920x1080 at 16px root, so 1rem = 1px there / 16.
+     Every rem-based size in the app matches the Figma spec exactly at
+     that width. Below it, the root font-size steps down at common
+     device-class breakpoints so rem-based spacing/type scales down
+     proportionally instead of overflowing or staying oversized. */
+  html,
   body {
-    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  html {
+    font-size: 16px; /* 1920px and up — Figma spec, 1:1 */
+  }
+
+  /* Height thresholds are width thresholds scaled to the 1920x1080 aspect
+     ratio, so a short-but-wide window shrinks the same as a narrow-but-tall
+     one — whichever dimension is more constrained wins.
+
+     Every threshold below is padded a couple of px above its "clean"
+     value (1728 -> 1730, 972 -> 974, etc). On displays with fractional OS
+     scaling (e.g. 150%), window.innerWidth/innerHeight can report an exact
+     round number while the sub-pixel value the media query engine actually
+     evaluates is a hair higher, causing an exact-value threshold to not
+     match when you'd expect it to. The padding absorbs that rounding gap. */
+  @media (max-width: 1730px), (max-height: 974px) { html { font-size: 15px; } }   /* large laptops */
+  @media (max-width: 1538px), (max-height: 866px) { html { font-size: 14px; } }   /* laptops */
+  @media (max-width: 1368px), (max-height: 770px) { html { font-size: 10.8px; } }   /* common laptop width */
+  @media (max-height: 587px) { html { font-size: 9.4px; } }                       /* your working window height */
+  @media (max-width: 1026px), (max-height: 578px) { html { font-size: 9px; } }    /* tablets */
+  @media (max-width: 770px),  (max-height: 434px) { html { font-size: 8.5px; } }  /* small tablets */
+  @media (max-width: 482px),  (max-height: 272px) { html { font-size: 8px; } }    /* phones */
+
+  body {
+    @apply bg-background font-roboto font-normal;
   }
 }
 
@@ -28,12 +61,14 @@
   animation: marquee-up 33s linear infinite;
 }
 
-@keyframes fadeIn {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
+/* Keeps overflow scrollable (mouse wheel, trackpad, keyboard) without ever
+   painting a scrollbar track — used on panels where content can legitimately
+   exceed the viewport but a visible scrollbar isn't part of the design. */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* old Edge/IE */
 }
 
-@keyframes modalPop {
-  0%   { opacity: 0; transform: scale(0.95) translateY(8px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, new Edge */
 }

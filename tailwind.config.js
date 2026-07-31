@@ -3,31 +3,33 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sora: ['Sora', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+      },
+      fontSize: {
+        'fs-heading': '5.125rem',      // 82px
+        'fs-subheading': '3rem',       // 48px
+        'fs-body-title': '1.875rem',   // 30px
+        'fs-body-subtitle': '1.75rem', // 28px
+        'fs-body-small': '1.375rem',   // 22px
+        'fs-nav': '1.125rem',          // 18px
+      },
       colors: {
-        brand: {
+        background: '#101010',
+        section: '#16181D',
+        heading: '#00B8C9',
+        subheading: {
           orange: '#FF9A5C',
-          teal:   '#47C89A',
-          cyan:   '#00B8C9',
+          green: '#47C89A',
         },
-        surface: {
-          darker: '#101010',
-          dark:   '#161616',
-          mid:    '#4B4B4B',
+        body: {
+          grey: '#89919F',
+          white: '#F0F0F0',
         },
-        neutral: {
-          muted: '#808080',
-          light: '#F0F0F0',
+        sidebar: {
+          selected: '#626975',
         },
-      },
-      keyframes: {
-        'marquee-up': {
-          '0%':   { transform: 'translateY(0)' },
-          '100%': { transform: 'translateY(-50%)' },
-        },
-      },
-      animation: {
-        'spin-slow':   'spin 3s linear infinite',
-        'marquee-up':  'marquee-up 2s linear infinite',
       },
     },
   },

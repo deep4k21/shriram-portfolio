@@ -1,50 +1,22 @@
-import { useState } from 'react'
 import PropTypes from 'prop-types'
-import Sidebar from '../components/Sidebar'
-import ContactModal from '../components/ContactModal'
-import AboutMe from '../pages/AboutMe'
-import CareerJourney from '../pages/CareerJourney'
-import Portfolio from '../pages/Portfolio'
-import PortfolioDetail from '../pages/PortfolioDetail'
-import { portfolioSections } from '../data/portfolio'
 
-export default function MainLayout({ onGoHome }) {
-  const [activeId, setActiveId] = useState('about')
-  const [contactOpen, setContactOpen] = useState(false)
-
-  function handleNavigate(id) {
-    if (id === 'home') {
-      onGoHome()
-    } else if (id === 'connect') {
-      setContactOpen(true)
-    } else {
-      setActiveId(id)
-    }
-  }
-
-  const pages = {
-    about:     () => <AboutMe />,
-    portfolio: () => <Portfolio onNavigate={handleNavigate} />,
-    career:    () => <CareerJourney />,
-  }
-
-  for (const section of portfolioSections) {
-    pages[section.id] = () => <PortfolioDetail section={section} />
-  }
-
-  const Page = pages[activeId] ?? pages.about
-
+export default function MainLayout({ sidebar, children }) {
   return (
-    <div className="flex h-screen w-screen bg-surface-darker">
-      <Sidebar activeId={activeId} onNavigate={handleNavigate} />
-      <main className="flex-1 overflow-hidden">
-        <Page />
+    <div className="flex h-screen w-screen gap-[1%] bg-background p-0">
+      <aside
+        className="no-scrollbar h-full w-[20%] shrink-0 overflow-y-auto rounded-[1.25rem] bg-section pt-10 pr-10 pl-10"
+        style={{ paddingBottom: 'min(35.0625rem, 20vh)' }}
+      >
+        {sidebar}
+      </aside>
+      <main className="no-scrollbar h-full w-[79%] overflow-y-auto rounded-[1.25rem] bg-section px-10 py-10">
+        {children}
       </main>
-      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </div>
   )
 }
 
 MainLayout.propTypes = {
-  onGoHome: PropTypes.func.isRequired,
+  sidebar: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 }
