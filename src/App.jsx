@@ -3,11 +3,13 @@ import MainLayout from './layouts/MainLayout'
 import Sidebar from './components/Sidebar'
 import Home from './pages/Home'
 import AboutMe from './pages/AboutMe'
+import ContactModal from './components/ContactModal'
 import ScaleDebugBadge from './components/ScaleDebugBadge'
 
 function App() {
   const [view, setView] = useState('home')
   const [activeId, setActiveId] = useState('about')
+  const [contactOpen, setContactOpen] = useState(false)
   const transitioning = useRef(false)
 
   function handleWheel(e) {
@@ -41,6 +43,8 @@ function App() {
                 if (id === 'home') {
                   transitioning.current = false
                   setView('home')
+                } else if (id === 'connect') {
+                  setContactOpen(true)
                 } else {
                   setActiveId(id)
                 }
@@ -55,6 +59,8 @@ function App() {
           )}
         </MainLayout>
       </div>
+
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
 
       {import.meta.env.DEV && <ScaleDebugBadge />}
     </div>
