@@ -72,3 +72,13 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, new Edge */
 }
+
+@keyframes fade-scale-center {
+  0%, 100% { opacity: 0.4; transform: scale(0.92); }
+  50%      { opacity: 1;   transform: scale(1); }
+}
+
+.fade-scale-center {
+  transform-origin: center;
+  animation: fade-scale-center 4s ease-in-out infinite;
+}
