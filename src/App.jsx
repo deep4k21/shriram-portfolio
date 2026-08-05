@@ -4,12 +4,15 @@ import Sidebar from './components/Sidebar'
 import Home from './pages/Home'
 import AboutMe from './pages/AboutMe'
 import ContactModal from './components/ContactModal'
+import ProjectDetailModal from './components/ProjectDetailModal'
+import { mockProject } from './data/mockProject'
 import ScaleDebugBadge from './components/ScaleDebugBadge'
 
 function App() {
   const [view, setView] = useState('home')
   const [activeId, setActiveId] = useState('about')
   const [contactOpen, setContactOpen] = useState(false)
+  const [projectOpen, setProjectOpen] = useState(false)
   const transitioning = useRef(false)
 
   function handleWheel(e) {
@@ -45,6 +48,9 @@ function App() {
                   setView('home')
                 } else if (id === 'connect') {
                   setContactOpen(true)
+                } else if (id === 'portfolio') {
+                  setProjectOpen(true)
+                  setActiveId(id)
                 } else {
                   setActiveId(id)
                 }
@@ -61,6 +67,11 @@ function App() {
       </div>
 
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+      <ProjectDetailModal
+        open={projectOpen}
+        onClose={() => setProjectOpen(false)}
+        content={mockProject}
+      />
 
       {import.meta.env.DEV && <ScaleDebugBadge />}
     </div>
