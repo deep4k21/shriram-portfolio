@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-export default function FlipTile({ style }) {
+export default function FlipTile({ style, frontClassName = 'bg-subheading-green', backClassName = 'bg-subheading-orange' }) {
   const [flipped, setFlipped] = useState(false)
 
   useEffect(() => {
@@ -20,12 +20,12 @@ export default function FlipTile({ style }) {
       >
         {/* Front face — image goes here later */}
         <div
-          className="absolute inset-0 bg-subheading-green"
+          className={`absolute inset-0 ${frontClassName}`}
           style={{ backfaceVisibility: 'hidden' }}
         />
         {/* Back face — second image goes here later */}
         <div
-          className="absolute inset-0 bg-subheading-orange"
+          className={`absolute inset-0 ${backClassName}`}
           style={{ backfaceVisibility: 'hidden', transform: 'rotateX(180deg)' }}
         />
       </div>
@@ -35,4 +35,6 @@ export default function FlipTile({ style }) {
 
 FlipTile.propTypes = {
   style: PropTypes.object.isRequired,
+  frontClassName: PropTypes.string,
+  backClassName: PropTypes.string,
 }

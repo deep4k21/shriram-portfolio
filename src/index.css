@@ -83,6 +83,53 @@
   animation: fade-scale-center 4s ease-in-out infinite;
 }
 
+/* Depth-tiered forward zoom: everything on the outgoing page scales UP
+   together (never shrinks, never fades) but layers closer to the "camera"
+   scale up faster/further than background layers, so the page has real
+   parallax depth as it rushes toward the viewer — matching the classic
+   scroll-zoom effect where foreground content flies past faster than the
+   backdrop. The transition ends with a hard cut to the new variant, already
+   in place at rest — no separate object growing from a point. */
+@keyframes zoom-depth-back {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.6); }
+}
+
+@keyframes zoom-depth-mid {
+  0%   { transform: scale(1); }
+  100% { transform: scale(2.4); }
+}
+
+@keyframes zoom-depth-front {
+  0%   { transform: scale(1); }
+  100% { transform: scale(3.6); }
+}
+
+/* Landing phase: plays on the new variant right as it takes over after the
+   dive-forward finishes — starts small (as if just arrived, still close to
+   the vanishing point) and grows out to full size, so the cut into the new
+   page continues to feel like motion instead of a hard snap to scale(1). */
+@keyframes zoom-land {
+  0%   { transform: scale(0.4); }
+  100% { transform: scale(1); }
+}
+
+.animate-zoom-land {
+  animation: zoom-land 1.4s cubic-bezier(0.15, 0.9, 0.3, 1) forwards;
+}
+
+.animate-zoom-depth-back {
+  animation: zoom-depth-back 1.4s cubic-bezier(0.55, 0, 0.85, 0.35) forwards;
+}
+
+.animate-zoom-depth-mid {
+  animation: zoom-depth-mid 1.4s cubic-bezier(0.55, 0, 0.85, 0.35) forwards;
+}
+
+.animate-zoom-depth-front {
+  animation: zoom-depth-front 1.4s cubic-bezier(0.55, 0, 0.85, 0.35) forwards;
+}
+
 @keyframes fadeIn {
   0%   { opacity: 0; }
   100% { opacity: 1; }
