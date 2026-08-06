@@ -30,6 +30,7 @@
      match when you'd expect it to. The padding absorbs that rounding gap. */
   @media (max-width: 1730px), (max-height: 974px) { html { font-size: 15px; } }   /* large laptops */
   @media (max-width: 1538px), (max-height: 866px) { html { font-size: 14px; } }   /* laptops */
+  @media (max-width: 1472px), (max-height: 773px) { html { font-size: 12.4px; } }  /* mid laptop width */
   @media (max-width: 1368px), (max-height: 770px) { html { font-size: 10.8px; } }   /* common laptop width */
   @media (max-height: 587px) { html { font-size: 9.4px; } }                       /* your working window height */
   @media (max-width: 1026px), (max-height: 578px) { html { font-size: 9px; } }    /* tablets */
