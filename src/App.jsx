@@ -73,7 +73,7 @@ function App() {
         content={mockProject}
       />
 
-      {import.meta.env.DEV && <ScaleDebugBadge />}
+      <ScaleDebugBadge />
     </div>
   )
 }
