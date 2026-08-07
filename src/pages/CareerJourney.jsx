@@ -14,16 +14,16 @@ export default function CareerJourney() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex h-full min-h-full flex-col gap-[1.5rem]">
       {/* Academic & Professional Journey */}
-      <div className="rounded-[0.625rem] border border-[#3C3C3C] bg-section/80 p-[2.5rem] backdrop-blur-xl">
+      <div className="rounded-[0.625rem] border border-[#3C3C3C] bg-section/80 p-[1.75rem] backdrop-blur-xl">
         <p className="font-roboto text-fs-body-title font-medium text-heading">
           Academic &amp; Professional Journey
         </p>
-        <p className="mt-[1.25rem] font-roboto text-fs-body-subtitle font-bold text-body-white">
+        <p className="mt-[0.75rem] font-roboto text-fs-body-subtitle font-bold text-body-white">
           B.Sc., Visual Communication
         </p>
-        <p className="mt-[1.25rem] font-roboto text-fs-body-subtitle font-normal text-body-grey">
+        <p className="mt-[0.75rem] font-roboto text-fs-body-subtitle font-normal text-body-grey">
           SRM Institute of Science and Technology, Chennai.
         </p>
       </div>
@@ -48,7 +48,7 @@ export default function CareerJourney() {
 
       {/* Role + description for the active company */}
       <div
-        className="rounded-[0.625rem] bg-black/60 p-[2.5rem] backdrop-blur-[0.625rem]"
+        className="no-scrollbar min-h-[32rem] flex-1 overflow-y-auto rounded-[0.625rem] bg-black/60 p-[1.75rem] backdrop-blur-[0.625rem]"
         onMouseEnter={() => active.progression && setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >

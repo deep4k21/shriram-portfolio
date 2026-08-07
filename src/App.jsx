@@ -4,7 +4,11 @@ import Sidebar from './components/Sidebar'
 import Home from './pages/Home'
 import AboutMe from './pages/AboutMe'
 import CareerJourney from './pages/CareerJourney'
+import Portfolio from './pages/Portfolio'
 import ContactModal from './components/ContactModal'
+// ProjectDetailModal was wired to the Portfolio sidebar link for early
+// testing; kept available (see mockProject) but no longer triggered from
+// navigation now that the real Portfolio page exists.
 import ProjectDetailModal from './components/ProjectDetailModal'
 import { mockProject } from './data/mockProject'
 import ScaleDebugBadge from './components/ScaleDebugBadge'
@@ -49,9 +53,6 @@ function App() {
                   setView('home')
                 } else if (id === 'connect') {
                   setContactOpen(true)
-                } else if (id === 'portfolio') {
-                  setProjectOpen(true)
-                  setActiveId(id)
                 } else {
                   setActiveId(id)
                 }
@@ -63,6 +64,8 @@ function App() {
             <AboutMe />
           ) : activeId === 'career' ? (
             <CareerJourney />
+          ) : activeId === 'portfolio' || activeId.startsWith('portfolio-') ? (
+            <Portfolio onNavigate={setActiveId} />
           ) : (
             <div className="text-body-white">Coming soon</div>
           )}
