@@ -123,7 +123,7 @@ export const portfolioCategories = [
       ],
       stats: [
         { value: '4', label: 'Explorations' },
-        // "%" renders at a smaller size than "100" — see PortfolioDetail.jsx
+        // "%" renders at a smaller size than "100" — see Portfolio.jsx
         { value: '100', valueSuffix: '%', label: 'Self-Initiated' },
         { value: '∞', label: 'Creative Freedom' },
         { value: '1', label: 'Philosophy' },

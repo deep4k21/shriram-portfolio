@@ -11,7 +11,7 @@ const CloseIcon = () => (
   </svg>
 )
 
-export default function ProjectDetailModal({ open, onClose, content }) {
+export default function ProjectDetailModal({ open, onClose, content, layoutId }) {
   useEffect(() => {
     if (!open) return
 
@@ -57,13 +57,17 @@ export default function ProjectDetailModal({ open, onClose, content }) {
       transition={{ duration: 0.2, ease: 'easeOut' }}
     >
       <motion.div
+        layoutId={layoutId}
         className="themed-scrollbar relative max-h-full w-full max-w-[93.75rem] overflow-y-auto rounded-[1.25rem] border border-white/10 bg-black/60 shadow-[0_0_2.28125rem_-0.3125rem_rgba(0,0,0,0.2)] backdrop-blur-[0.625rem]"
         onClick={(e) => e.stopPropagation()}
-        initial={{ opacity: 0, scale: 0.94, y: 16 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.96, y: 12 }}
-        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3, ease: 'easeOut', delay: open ? 0.25 : 0 }}
+        >
         <button
           onClick={onClose}
           aria-label="Close"
@@ -213,6 +217,7 @@ export default function ProjectDetailModal({ open, onClose, content }) {
             {process}
           </div>
         </div>
+        </motion.div>
       </motion.div>
     </motion.div>
       )}
@@ -223,6 +228,7 @@ export default function ProjectDetailModal({ open, onClose, content }) {
 ProjectDetailModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  layoutId: PropTypes.string,
   content: PropTypes.shape({
     thumbnails: PropTypes.arrayOf(PropTypes.string),
     activeThumbnailIndex: PropTypes.number,

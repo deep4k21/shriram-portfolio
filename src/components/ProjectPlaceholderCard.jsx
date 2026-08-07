@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 import { motion } from 'motion/react'
 
-export default function ProjectPlaceholderCard({ index, onSelect }) {
+export default function ProjectPlaceholderCard({ index, layoutId, onSelect }) {
   return (
     <motion.button
       type="button"
+      layoutId={layoutId}
       onClick={onSelect}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -20,5 +21,6 @@ export default function ProjectPlaceholderCard({ index, onSelect }) {
 
 ProjectPlaceholderCard.propTypes = {
   index: PropTypes.number.isRequired,
+  layoutId: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
 }

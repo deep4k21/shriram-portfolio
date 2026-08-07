@@ -4,6 +4,7 @@ import { motion } from 'motion/react'
 const mountVariants = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } },
+  exit: { opacity: 0, transition: { duration: 0.15, ease: 'easeIn' } },
 }
 
 export default function PortfolioCategoryCard({ category, state, onHoverStart, onHoverEnd, onContinue }) {
@@ -26,6 +27,7 @@ export default function PortfolioCategoryCard({ category, state, onHoverStart, o
 
   return (
     <motion.button
+      layoutId={`portfolio-card-${category.id}`}
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
       onClick={onContinue}
