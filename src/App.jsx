@@ -5,6 +5,8 @@ import Home from './pages/Home'
 import AboutMe from './pages/AboutMe'
 import CareerJourney from './pages/CareerJourney'
 import Portfolio from './pages/Portfolio'
+import PortfolioDetail from './pages/PortfolioDetail'
+import { portfolioCategories } from './data/portfolioCategories'
 import ContactModal from './components/ContactModal'
 // ProjectDetailModal was wired to the Portfolio sidebar link for early
 // testing; kept available (see mockProject) but no longer triggered from
@@ -64,8 +66,12 @@ function App() {
             <AboutMe />
           ) : activeId === 'career' ? (
             <CareerJourney />
-          ) : activeId === 'portfolio' || activeId.startsWith('portfolio-') ? (
+          ) : activeId === 'portfolio' ? (
             <Portfolio onNavigate={setActiveId} />
+          ) : activeId.startsWith('portfolio-') ? (
+            <PortfolioDetail
+              category={portfolioCategories.find((c) => c.id === activeId)}
+            />
           ) : (
             <div className="text-body-white">Coming soon</div>
           )}

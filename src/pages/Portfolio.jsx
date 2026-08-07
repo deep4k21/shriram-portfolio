@@ -1,69 +1,11 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import PortfolioCategoryCard from '../components/PortfolioCategoryCard'
-
-const categories = [
-  {
-    id: 'portfolio-uiux',
-    title: 'UI/UX Design',
-    tagline: 'Enterprise • SaaS • Product',
-    description:
-      'Designing intuitive digital experiences that transform complex workflows into scalable products and seamless user journeys.',
-    summary: 'Turning complexity into clarity.',
-    collectionLabel: 'Curated Collection',
-    collectionIntro: '',
-    collectionItems: ['Enterprise Dashboards', 'Websites', 'Design Systems', 'Product Experiences'],
-    ctaLabel: 'Continue to UI/UX Design',
-    cramTitle: 'UI/UX Design',
-    cramCtaLabel: 'View more',
-  },
-  {
-    id: 'portfolio-brand',
-    title: 'Brand Identity',
-    tagline: 'Identity • Strategy • Guidelines',
-    description:
-      'Building memorable brands through thoughtful identities and scalable visual systems.',
-    summary: 'Building brands that people remember.',
-    collectionLabel: 'Curated Collection',
-    collectionIntro: 'Brand exploration on',
-    collectionItems: ['Freshstart', 'Forge', 'HealthDesk', 'Project Agresor'],
-    ctaLabel: 'Continue to Brand Identity',
-    cramTitle: 'Brand Identity',
-    cramCtaLabel: 'View more',
-  },
-  {
-    id: 'portfolio-marketing',
-    title: 'Marketing Campaigns',
-    tagline: 'Creative • Growth • Performance',
-    description:
-      'Campaigns that combine storytelling, strategy, events, illustrations and measurable business impact.',
-    summary: 'Stories designed to perform.',
-    collectionLabel: 'Curated Collection',
-    collectionIntro: '',
-    collectionItems: ['Product Launches', 'Event Branding', 'Social Campaigns', 'Landing Pages'],
-    ctaLabel: 'Continue to Campaigns',
-    cramTitle: 'Marketing Campaigns',
-    cramCtaLabel: 'View more',
-  },
-  {
-    id: 'portfolio-illustrations',
-    title: 'What If — Brand Reimagined',
-    tagline: 'Conceptual • Explorations',
-    description:
-      'Speculative redesigns exploring how iconic brands could evolve through new visual systems.',
-    summary: 'Reimagining the familiar.',
-    collectionLabel: 'Curated Collection',
-    collectionIntro: 'Speculative case studies on',
-    collectionItems: ['Apple X Google', 'Nike X Adidas'],
-    ctaLabel: 'Continue to What If',
-    cramTitle: 'What If',
-    cramCtaLabel: 'View more',
-  },
-]
+import { portfolioCategories } from '../data/portfolioCategories'
 
 export default function Portfolio({ onNavigate }) {
   const [hoveredId, setHoveredId] = useState(null)
-  const rows = [categories.slice(0, 2), categories.slice(2, 4)]
+  const rows = [portfolioCategories.slice(0, 2), portfolioCategories.slice(2, 4)]
 
   function cardState(id, row) {
     if (!hoveredId) return 'default'
