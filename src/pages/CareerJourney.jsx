@@ -1,6 +1,22 @@
 import { useState } from 'react'
-import { motion } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 import { careerCompanies } from '../data/careerCompanies'
+
+const contentVariants = {
+  hidden: { opacity: 0, y: 10 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } },
+  exit: { opacity: 0, y: -10, transition: { duration: 0.15, ease: 'easeIn' } },
+}
+
+const listVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } },
+}
+
+const listItemVariants = {
+  hidden: { opacity: 0, y: 8 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.25, ease: 'easeOut' } },
+}
 
 export default function CareerJourney() {
   const [activeId, setActiveId] = useState(careerCompanies[0].id)
@@ -56,49 +72,58 @@ export default function CareerJourney() {
         onMouseEnter={() => active.progression && setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <div className="flex items-center overflow-hidden">
-          {/* Previous roles — slide/fade in on hover, staggered per index */}
-          {prevRoles.map((title, i) => (
-            <div
-              key={title}
-              className="flex items-center overflow-hidden transition-all duration-300 ease-out"
-              style={{
-                maxWidth: hovered ? '18.75rem' : '0rem',
-                opacity: hovered ? 1 : 0,
-                transitionDelay: hovered ? `${i * 100}ms` : '0ms',
-              }}
-            >
-              <span className="whitespace-nowrap font-sora text-fs-body-subtitle font-semibold text-subheading-green">
-                {title}
-              </span>
-              <span className="mx-[0.75rem] whitespace-nowrap text-body-grey/60">→</span>
-            </div>
-          ))}
-
-          <p className="whitespace-nowrap font-sora text-fs-body-subtitle font-semibold text-subheading-orange">
-            {active.role}
-          </p>
-        </div>
-
-        <p className="mt-[0.5rem] font-roboto text-fs-body-small font-bold text-body-grey">
-          ({active.period})
-        </p>
-
-        <ul className="mt-[2.5rem] list-disc space-y-[1.875rem] pl-[2.0625rem] font-roboto text-fs-body-small font-normal text-body-grey">
-          {active.points.map((spans, i) => (
-            <li key={i}>
-              {spans.map((span, j) =>
-                span.strong ? (
-                  <span key={j} className="font-medium text-body-white">
-                    {span.text}
+        <AnimatePresence mode="wait">
+          <motion.div key={activeId} variants={contentVariants} initial="hidden" animate="show" exit="exit">
+            <div className="flex items-center overflow-hidden">
+              {/* Previous roles — slide/fade in on hover, staggered per index */}
+              {prevRoles.map((title, i) => (
+                <div
+                  key={title}
+                  className="flex items-center overflow-hidden transition-all duration-300 ease-out"
+                  style={{
+                    maxWidth: hovered ? '18.75rem' : '0rem',
+                    opacity: hovered ? 1 : 0,
+                    transitionDelay: hovered ? `${i * 100}ms` : '0ms',
+                  }}
+                >
+                  <span className="whitespace-nowrap font-sora text-fs-body-subtitle font-semibold text-subheading-green">
+                    {title}
                   </span>
-                ) : (
-                  <span key={j}>{span.text}</span>
-                )
-              )}
-            </li>
-          ))}
-        </ul>
+                  <span className="mx-[0.75rem] whitespace-nowrap text-body-grey/60">→</span>
+                </div>
+              ))}
+
+              <p className="whitespace-nowrap font-sora text-fs-body-subtitle font-semibold text-subheading-orange">
+                {active.role}
+              </p>
+            </div>
+
+            <p className="mt-[0.5rem] font-roboto text-fs-body-small font-bold text-body-grey">
+              ({active.period})
+            </p>
+
+            <motion.ul
+              variants={listVariants}
+              initial="hidden"
+              animate="show"
+              className="mt-[2.5rem] list-disc space-y-[1.875rem] pl-[2.0625rem] font-roboto text-fs-body-small font-normal text-body-grey"
+            >
+              {active.points.map((spans, i) => (
+                <motion.li key={i} variants={listItemVariants}>
+                  {spans.map((span, j) =>
+                    span.strong ? (
+                      <span key={j} className="font-medium text-body-white">
+                        {span.text}
+                      </span>
+                    ) : (
+                      <span key={j}>{span.text}</span>
+                    )
+                  )}
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   )
