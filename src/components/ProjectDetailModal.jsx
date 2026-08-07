@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { AnimatePresence, motion } from 'motion/react'
 
 const arrowNext = '/images/project-modal/arrow-next.svg'
 const arrowNextHover = '/images/project-modal/arrow-next-hover.svg'
@@ -27,7 +28,7 @@ export default function ProjectDetailModal({ open, onClose, content }) {
     }
   }, [open, onClose])
 
-  if (!open || !content) return null
+  if (!content) return null
 
   const {
     thumbnails = [],
@@ -45,13 +46,23 @@ export default function ProjectDetailModal({ open, onClose, content }) {
   } = content
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-[2rem] backdrop-blur-sm animate-[fadeIn_0.2s_ease-out]"
+    <AnimatePresence>
+      {open && (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-[2rem] backdrop-blur-sm"
       onClick={onClose}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2, ease: 'easeOut' }}
     >
-      <div
-        className="themed-scrollbar relative max-h-full w-full max-w-[93.75rem] animate-[modalPop_0.25s_ease-out] overflow-y-auto rounded-[1.25rem] border border-white/10 bg-black/60 shadow-[0_0_2.28125rem_-0.3125rem_rgba(0,0,0,0.2)] backdrop-blur-[0.625rem]"
+      <motion.div
+        className="themed-scrollbar relative max-h-full w-full max-w-[93.75rem] overflow-y-auto rounded-[1.25rem] border border-white/10 bg-black/60 shadow-[0_0_2.28125rem_-0.3125rem_rgba(0,0,0,0.2)] backdrop-blur-[0.625rem]"
         onClick={(e) => e.stopPropagation()}
+        initial={{ opacity: 0, scale: 0.94, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96, y: 12 }}
+        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
       >
         <button
           onClick={onClose}
@@ -202,8 +213,10 @@ export default function ProjectDetailModal({ open, onClose, content }) {
             {process}
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 

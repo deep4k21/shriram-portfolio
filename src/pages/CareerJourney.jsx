@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from 'motion/react'
 import { careerCompanies } from '../data/careerCompanies'
 
 export default function CareerJourney() {
@@ -31,10 +32,13 @@ export default function CareerJourney() {
       {/* Company tabs — clicking switches which company's role/points show below */}
       <div className="flex gap-[1.25rem]">
         {careerCompanies.map((company) => (
-          <button
+          <motion.button
             key={company.id}
             type="button"
             onClick={() => handleTabClick(company.id)}
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
             className={`flex items-center justify-center rounded-[0.625rem] border p-[1.25rem] transition-opacity duration-150 ${
               activeId === company.id
                 ? 'border-transparent bg-black opacity-100'
@@ -42,7 +46,7 @@ export default function CareerJourney() {
             }`}
           >
             <img src={company.logo} alt={company.name} className="h-[1.9375rem] w-auto object-contain" />
-          </button>
+          </motion.button>
         ))}
       </div>
 

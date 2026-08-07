@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
 import MainLayout from './layouts/MainLayout'
 import Sidebar from './components/Sidebar'
 import Home from './pages/Home'
@@ -62,19 +63,30 @@ function App() {
             />
           }
         >
-          {activeId === 'about' ? (
-            <AboutMe />
-          ) : activeId === 'career' ? (
-            <CareerJourney />
-          ) : activeId === 'portfolio' ? (
-            <Portfolio onNavigate={setActiveId} />
-          ) : activeId.startsWith('portfolio-') ? (
-            <PortfolioDetail
-              category={portfolioCategories.find((c) => c.id === activeId)}
-            />
-          ) : (
-            <div className="text-body-white">Coming soon</div>
-          )}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeId}
+              className="h-full w-full"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {activeId === 'about' ? (
+                <AboutMe />
+              ) : activeId === 'career' ? (
+                <CareerJourney />
+              ) : activeId === 'portfolio' ? (
+                <Portfolio onNavigate={setActiveId} />
+              ) : activeId.startsWith('portfolio-') ? (
+                <PortfolioDetail
+                  category={portfolioCategories.find((c) => c.id === activeId)}
+                />
+              ) : (
+                <div className="text-body-white">Coming soon</div>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </MainLayout>
       </div>
 

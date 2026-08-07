@@ -1,8 +1,19 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { motion } from 'motion/react'
 import ProjectPlaceholderCard from '../components/ProjectPlaceholderCard'
 import ProjectDetailModal from '../components/ProjectDetailModal'
 import { mockProject } from '../data/mockProject'
+
+const gridVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } },
+}
 
 export default function PortfolioDetail({ category }) {
   const { heading, descriptionSpans, stats, projectCount, bgClassName, statFontClassName } =
@@ -51,20 +62,23 @@ export default function PortfolioDetail({ category }) {
       {/* 2x4 grid, but only the first 3 slots of row 1 and first 2 of row 2
           hold cards — an L-shape, matching the Figma layout — rather than
           letting the grid auto-fill every cell. */}
-      <div className="grid flex-1 grid-cols-4 grid-rows-2 gap-[1.5rem]">
+      <motion.div
+        key={heading}
+        className="grid flex-1 grid-cols-4 grid-rows-2 gap-[1.5rem]"
+        variants={gridVariants}
+        initial="hidden"
+        animate="show"
+      >
         {Array.from({ length: projectCount }, (_, i) => {
           const row = i < 3 ? 1 : 2
           const col = i < 3 ? i + 1 : i - 3 + 1
           return (
-            <ProjectPlaceholderCard
-              key={i}
-              index={i + 1}
-              onSelect={() => setSelectedProject(i + 1)}
-              style={{ gridRow: row, gridColumn: col }}
-            />
+            <motion.div key={i} variants={cardVariants} className="h-full w-full" style={{ gridRow: row, gridColumn: col }}>
+              <ProjectPlaceholderCard index={i + 1} onSelect={() => setSelectedProject(i + 1)} />
+            </motion.div>
           )
         })}
-      </div>
+      </motion.div>
 
       <ProjectDetailModal
         open={selectedProject !== null}

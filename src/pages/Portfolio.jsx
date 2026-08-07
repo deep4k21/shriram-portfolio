@@ -1,7 +1,13 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { motion } from 'motion/react'
 import PortfolioCategoryCard from '../components/PortfolioCategoryCard'
 import { portfolioCategories } from '../data/portfolioCategories'
+
+const rowVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+}
 
 export default function Portfolio({ onNavigate }) {
   const [hoveredId, setHoveredId] = useState(null)
@@ -29,7 +35,13 @@ export default function Portfolio({ onNavigate }) {
 
       <div className="flex flex-1 flex-col gap-[2rem]">
         {rows.map((row, i) => (
-          <div key={i} className="flex flex-1 gap-[2rem]">
+          <motion.div
+            key={i}
+            className="flex flex-1 gap-[2rem]"
+            variants={rowVariants}
+            initial="hidden"
+            animate="show"
+          >
             {row.map((category) => (
               <PortfolioCategoryCard
                 key={category.id}
@@ -40,7 +52,7 @@ export default function Portfolio({ onNavigate }) {
                 onContinue={() => onNavigate(category.id)}
               />
             ))}
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

@@ -1,4 +1,10 @@
 import PropTypes from 'prop-types'
+import { motion } from 'motion/react'
+
+const mountVariants = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } },
+}
 
 export default function PortfolioCategoryCard({ category, state, onHoverStart, onHoverEnd, onContinue }) {
   const {
@@ -19,10 +25,13 @@ export default function PortfolioCategoryCard({ category, state, onHoverStart, o
   const collectionLine = [collectionIntro, ...collectionItems].filter(Boolean).join(' • ')
 
   return (
-    <button
+    <motion.button
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
       onClick={onContinue}
+      variants={mountVariants}
+      whileTap={{ scale: 0.985 }}
+      transition={{ duration: 0.15, ease: 'easeOut' }}
       className={`group flex h-full min-h-[18rem] min-w-0 flex-col overflow-hidden rounded-[0.625rem] border border-[#3C3C3C] p-[2rem] text-left backdrop-blur-[0.625rem] transition-[flex-grow,background-color] duration-500 ease-in-out ${
         isExpanded ? 'bg-black' : 'bg-[#15161A]/80'
       }`}
@@ -95,7 +104,7 @@ export default function PortfolioCategoryCard({ category, state, onHoverStart, o
       <p className="mt-[0.75rem] shrink-0 whitespace-nowrap font-sora text-fs-body-small font-semibold text-body-white">
         {isCramped ? cramCtaLabel : ctaLabel} <span aria-hidden="true">→</span>
       </p>
-    </button>
+    </motion.button>
   )
 }
 

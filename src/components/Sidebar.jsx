@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { AnimatePresence, motion } from 'motion/react'
 
 const portfolioSections = [
   { id: 'portfolio-uiux', label: 'UI/UX' },
@@ -50,35 +51,58 @@ export default function Sidebar({ activeId, onNavigate }) {
 
           return (
             <div key={id}>
-              <button
+              <motion.button
                 onClick={() => handleNavClick(id)}
-                className={`flex w-full items-center gap-3 rounded-xl px-5 py-4 text-left text-fs-nav font-roboto transition-colors duration-150 ${
+                whileHover={{ x: 4 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.15, ease: 'easeOut' }}
+                className={`relative flex w-full items-center gap-3 rounded-xl px-5 py-4 text-left text-fs-nav font-roboto ${
                   isActive
-                    ? 'bg-sidebar-selected font-bold text-body-white'
+                    ? 'font-bold text-body-white'
                     : 'font-normal text-body-white hover:bg-sidebar-selected/30'
                 }`}
               >
-                <img src={icon} alt="" className="h-6 w-6 shrink-0" />
-                <span className="flex-1 truncate">{label}</span>
-              </button>
+                {isActive && (
+                  <motion.div
+                    layoutId="sidebar-active-pill"
+                    className="absolute inset-0 rounded-xl bg-sidebar-selected"
+                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                  />
+                )}
+                <img src={icon} alt="" className="relative z-10 h-6 w-6 shrink-0" />
+                <span className="relative z-10 flex-1 truncate">{label}</span>
+              </motion.button>
 
-              {hasSubmenu && portfolioOpen && (
-                <div className="mt-1 flex flex-col gap-1 rounded-xl border border-white/10 p-2">
-                  {portfolioSections.map(({ id: subId, label: subLabel }) => (
-                    <button
-                      key={subId}
-                      onClick={() => onNavigate(subId)}
-                      className={`w-full rounded-lg px-4 py-3 text-left text-fs-body-small font-roboto transition-colors duration-150 ${
-                        activeId === subId
-                          ? 'bg-sidebar-selected font-bold text-body-white'
-                          : 'font-normal text-body-white hover:bg-sidebar-selected/30'
-                      }`}
-                    >
-                      {subLabel}
-                    </button>
-                  ))}
-                </div>
-              )}
+              <AnimatePresence initial={false}>
+                {hasSubmenu && portfolioOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="mt-1 flex flex-col gap-1 rounded-xl border border-white/10 p-2">
+                      {portfolioSections.map(({ id: subId, label: subLabel }) => (
+                        <motion.button
+                          key={subId}
+                          onClick={() => onNavigate(subId)}
+                          whileHover={{ x: 4 }}
+                          whileTap={{ scale: 0.97 }}
+                          transition={{ duration: 0.15, ease: 'easeOut' }}
+                          className={`relative w-full rounded-lg px-4 py-3 text-left text-fs-body-small font-roboto ${
+                            activeId === subId
+                              ? 'bg-sidebar-selected font-bold text-body-white'
+                              : 'font-normal text-body-white hover:bg-sidebar-selected/30'
+                          }`}
+                        >
+                          {subLabel}
+                        </motion.button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           )
         })}
