@@ -1,0 +1,167 @@
+export const careerCompanies = [
+  {
+    id: 'protiviti',
+    name: 'Protiviti',
+    logo: '/images/career/logo-protiviti.svg',
+    role: 'Deputy Manager - Marketing Design',
+    period: 'June 2023 - April 2025',
+    points: [
+      [{ text: 'Led the ' }, { text: 'UI/UX', strong: true }, { text: ' function within the Marketing Design team.' }],
+      [
+        { text: 'Designed enterprise ' },
+        { text: 'dashboards', strong: true },
+        { text: ', ' },
+        { text: 'mobile apps,', strong: true },
+        { text: ' and ' },
+        { text: 'web experiences', strong: true },
+        { text: ' for clients across India and the Middle East.' },
+      ],
+      [
+        { text: 'Created ' },
+        { text: 'marketing collaterals', strong: true },
+        { text: ' including exhibition booths, brochures, e-magazines, and campaign assets.' },
+      ],
+      [
+        { text: 'Simplified complex business challenges into ' },
+        { text: 'strategic presentations,', strong: true },
+        { text: ' intuitive & user-centered digital solutions.' },
+      ],
+      [
+        { text: 'Built and maintained ' },
+        { text: 'scalable design systems', strong: true },
+        { text: ' to ensure consistency across projects.' },
+      ],
+      [
+        { text: 'Transformed ideas into ' },
+        { text: 'interactive dashboard prototypes,', strong: true },
+        { text: ' helping stakeholders visualize solutions before development.' },
+      ],
+    ],
+  },
+  {
+    id: 'freshworks',
+    name: 'Freshworks',
+    logo: '/images/career/logo-freshworks.svg',
+    role: 'Senior Visual Designer',
+    period: 'January 2019 - December 2022',
+    progression: ['Graphic Designer', 'Visual Designer', 'Senior Visual Designer'],
+    points: [
+      [
+        { text: 'Progressed through ' },
+        { text: 'three', strong: true },
+        { text: ' design roles, led marketing design for the ' },
+        { text: 'Partnerships, Startups,', strong: true },
+        { text: ' and ' },
+        { text: 'Marketplace teams.', strong: true },
+      ],
+      [
+        { text: 'Collaborated with ' },
+        { text: '100+', strong: true },
+        { text: ' global stakeholders across regions and business functions.' },
+      ],
+      [
+        { text: 'Drove branding and creative direction for flagship programs including ' },
+        { text: 'Freshstart, Orbitshift Podcast,', strong: true },
+        { text: ' and ' },
+        { text: 'Forge.', strong: true },
+      ],
+      [
+        { text: 'Played a key role in the ' },
+        { text: 'Freshworks global rebranding', strong: true },
+        { text: ' initiative, helping scale visual consistency across digital touchpoints.' },
+      ],
+      [
+        { text: 'Designed integrated ' },
+        { text: 'marketing campaigns, event branding, landing pages,', strong: true },
+        { text: ' and digital experiences for global audiences.' },
+      ],
+      [
+        { text: 'Recognized for creative excellence through awards including ' },
+        { text: 'Best Rookie (2019)', strong: true },
+        { text: ' and ' },
+        { text: 'Certificate of Innovation (2020).', strong: true },
+      ],
+    ],
+  },
+  {
+    id: 'rrd',
+    name: 'RRD',
+    logo: '/images/career/logo-rd.png',
+    role: 'Graphic Designer',
+    period: 'August 2017 - October 2018',
+    points: [
+      [
+        { text: 'Designed executive presentations and visual communication materials for ' },
+        { text: 'Fortune 500 clients.', strong: true },
+      ],
+      [
+        { text: 'Created custom ' },
+        { text: 'illustrations, infographics,', strong: true },
+        { text: ' and ' },
+        { text: 'layouts', strong: true },
+        { text: ' for business-critical communications.' },
+      ],
+      [
+        { text: 'Collaborated with animation teams to develop ' },
+        { text: 'storyboards', strong: true },
+        { text: ' and ' },
+        { text: 'motion design assets.', strong: true },
+      ],
+      [
+        { text: 'Translated complex information into ' },
+        { text: 'visually engaging', strong: true },
+        { text: ' and ' },
+        { text: 'easy-to-understand presentations.', strong: true },
+      ],
+      [
+        { text: 'Maintained brand consistency while managing ' },
+        { text: 'high-volume', strong: true },
+        { text: ' creative requests.' },
+      ],
+      [
+        { text: 'Delivered creative solutions for global clients including ' },
+        { text: 'First Data, Cisco,', strong: true },
+        { text: ' and ' },
+        { text: 'McKinsey & Company.', strong: true },
+      ],
+    ],
+  },
+  {
+    id: '2adpro',
+    name: '2adpro',
+    logo: '/images/career/logo-2adpro.svg',
+    role: 'Junior Designer',
+    period: 'April 2016 - July 2017',
+    points: [
+      [
+        { text: 'Created ' },
+        { text: 'print', strong: true },
+        { text: ' and ' },
+        { text: 'digital advertisements', strong: true },
+        { text: ' for leading publications across the ' },
+        { text: 'ANZ market.', strong: true },
+      ],
+      [
+        { text: 'Adapted creative assets across industries while adhering to ' },
+        { text: 'strict brand guidelines.', strong: true },
+      ],
+      [{ text: 'Produced ' }, { text: 'high-volume advertising creatives', strong: true }, { text: ' with accuracy and attention to detail.' }],
+      [
+        { text: 'Collaborated with production teams', strong: true },
+        { text: ' to ensure timely delivery of campaign assets.' },
+      ],
+      [
+        { text: 'Developed strong foundations in ' },
+        { text: 'layout design, typography,', strong: true },
+        { text: ' and visual storytelling.' },
+      ],
+      [
+        { text: 'Gained expertise in ' },
+        { text: 'production workflows', strong: true },
+        { text: ' and ' },
+        { text: 'market-specific', strong: true },
+        { text: ' creative execution.' },
+      ],
+    ],
+  },
+]

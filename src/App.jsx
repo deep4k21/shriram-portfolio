@@ -3,6 +3,7 @@ import MainLayout from './layouts/MainLayout'
 import Sidebar from './components/Sidebar'
 import Home from './pages/Home'
 import AboutMe from './pages/AboutMe'
+import CareerJourney from './pages/CareerJourney'
 import ContactModal from './components/ContactModal'
 import ProjectDetailModal from './components/ProjectDetailModal'
 import { mockProject } from './data/mockProject'
@@ -60,6 +61,8 @@ function App() {
         >
           {activeId === 'about' ? (
             <AboutMe />
+          ) : activeId === 'career' ? (
+            <CareerJourney />
           ) : (
             <div className="text-body-white">Coming soon</div>
           )}
